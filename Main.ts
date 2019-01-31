@@ -8,7 +8,12 @@ class Main {
     main() {
         this.instance = new SwimData()
         this.clonned = this.clone(this.instance);
-        console.log(this.clonned.sortByTime());
+        this.clonned.sortByTime();
+        console.log(this.clonned.swimmers);
+        this.clonned.sortBySex();
+        console.log(this.clonned.swimmers);
+        this.clonned.sortByAgeGroup();
+
     }
 
     clone(original) {
