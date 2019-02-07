@@ -21,21 +21,32 @@ const data = [
 ];
 import { Swimmer } from './Swimmer';
 
-export class SwimData {
+export
+class SwimData {
     public swimmers = new Array<Swimmer>();
     public ageGroup = {
-        first: [], //from 18 -23
+        first: [],  //from 18 -23
         second: [], //from 23 -26
-        third: [], //from 25 -30
+        third: [],  //from 25 -30
     }
 
     constructor(fileName = data) {
         fileName.forEach(element => {
             var swimmer = new Swimmer(element.name, element.age, element.time, element.sex);
             this.swimmers.push(swimmer);
-
-
         });
+
+    }
+    public getSwimmers() {
+        return this.swimmers;
+    }
+
+    public sortByNameHelper(x, y) {
+        return ((x.getName().toLowerCase() == y.getName().toLowerCase()) ? 0 : ((x.getName().toLowerCase() > y.getName().toLowerCase()) ? 1 : -1));
+    }
+
+    public sortByName() {
+        return this.swimmers.sort(this.sortByNameHelper);
     }
 
     public sortByTime() {
@@ -50,6 +61,7 @@ export class SwimData {
             }
         }
     }
+
     public sortByAge() {
         for (let i = 0; i < this.swimmers.length; i++) {
             for (let j = 0; j < this.swimmers.length; j++) {
@@ -61,6 +73,7 @@ export class SwimData {
             }
         }
     }
+
     public sortBySex() {
         for (let i = 0; i < this.swimmers.length; i++) {
             for (let j = 0; j < this.swimmers.length; j++) {
@@ -76,11 +89,11 @@ export class SwimData {
 
     public sortByAgeGroup() {
         this.swimmers.forEach((swimmer) => {
-            if(swimmer.getAge() <= 23 ){
+            if (swimmer.getAge() <= 23) {
                 this.ageGroup.first.push(swimmer);
-            } else if (swimmer.getAge() <= 26){
+            } else if (swimmer.getAge() <= 26) {
                 this.ageGroup.second.push(swimmer);
-            } else if (swimmer.getAge() > 26){
+            } else if (swimmer.getAge() > 26) {
                 this.ageGroup.third.push(swimmer);
             }
         });
