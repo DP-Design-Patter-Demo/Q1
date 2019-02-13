@@ -31,15 +31,15 @@ var data = [
     },
     {
         "name": "Mikiyas",
-        "sex": "F",
+        "sex": "M",
         "age": 20,
-        "time": 12.0
+        "time": 11.0
     },
     {
         "name": "Mikiyas Olika",
-        "sex": "M",
+        "sex": "F",
         "age": 22,
-        "time": 12.55
+        "time": 18.55
     }
 ];
 var SwimData = /** @class */ (function () {
@@ -68,7 +68,7 @@ var SwimData = /** @class */ (function () {
     };
     SwimData.prototype.sortByTime = function () {
         for (var i = 0; i < this.swimmers.length; i++) {
-            for (var j = 0; j < this.swimmers.length; j++) {
+            for (var j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getTime() > this.swimmers[j].getTime()) {
                     var swimmer = this.swimmers[i];
                     this.swimmers[i] = this.swimmers[j];
@@ -79,7 +79,7 @@ var SwimData = /** @class */ (function () {
     };
     SwimData.prototype.sortByAge = function () {
         for (var i = 0; i < this.swimmers.length; i++) {
-            for (var j = 0; j < this.swimmers.length; j++) {
+            for (var j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getAge() > this.swimmers[j].getAge()) {
                     var swimmer = this.swimmers[i];
                     this.swimmers[i] = this.swimmers[j];
@@ -90,7 +90,7 @@ var SwimData = /** @class */ (function () {
     };
     SwimData.prototype.sortBySex = function () {
         for (var i = 0; i < this.swimmers.length; i++) {
-            for (var j = 0; j < this.swimmers.length; j++) {
+            for (var j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getSex() > this.swimmers[j].getSex()) {
                     var swimmer = this.swimmers[i];
                     this.swimmers[i] = this.swimmers[j];
@@ -112,7 +112,6 @@ var SwimData = /** @class */ (function () {
                 _this.ageGroup.third.push(swimmer);
             }
         });
-        console.log(this.ageGroup);
     };
     return SwimData;
 }());
@@ -123,7 +122,7 @@ var Main = /** @class */ (function () {
         this.instance = new SwimData();
         this.clonned = this.clone(this.instance);
         this.originalView.innerHTML = this.createUI(this.instance.getSwimmers());
-        this.clonned.sortByName();
+        this.clonned.sortBySex();
         this.setView();
     }
     Main.prototype.sortByName = function () {
@@ -159,7 +158,6 @@ var Main = /** @class */ (function () {
         swimmers.forEach(function (element) {
             result += "<tr>\n            <td class=\"column1\">" + element.getName() + "</td>\n            <td class=\"column2\">" + element.getSex() + "</td>\n            <td class=\"column3\">" + element.getAge() + "</td>\n            <td class=\"column2\">" + element.getTime() + "</td>\n        </tr>";
         });
-        console.log(result);
         return result;
     };
     return Main;

@@ -45,15 +45,15 @@ const data = [
     },
     {
         "name": "Mikiyas",
-        "sex": "F",
+        "sex": "M",
         "age": 20,
-        "time": 12.0
+        "time": 11.0
     },
     {
         "name": "Mikiyas Olika",
-        "sex": "M",
+        "sex": "F",
         "age": 22,
-        "time": 12.55
+        "time": 18.55
     }
 ];
 
@@ -86,7 +86,7 @@ class SwimData {
 
     public sortByTime() {
         for (let i = 0; i < this.swimmers.length; i++) {
-            for (let j = 0; j < this.swimmers.length; j++) {
+            for (let j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getTime() > this.swimmers[j].getTime()) {
                     var swimmer = this.swimmers[i]
                     this.swimmers[i] = this.swimmers[j];
@@ -99,7 +99,7 @@ class SwimData {
 
     public sortByAge() {
         for (let i = 0; i < this.swimmers.length; i++) {
-            for (let j = 0; j < this.swimmers.length; j++) {
+            for (let j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getAge() > this.swimmers[j].getAge()) {
                     var swimmer = this.swimmers[i]
                     this.swimmers[i] = this.swimmers[j];
@@ -111,7 +111,7 @@ class SwimData {
 
     public sortBySex() {
         for (let i = 0; i < this.swimmers.length; i++) {
-            for (let j = 0; j < this.swimmers.length; j++) {
+            for (let j = i; j < this.swimmers.length; j++) {
                 if (this.swimmers[i].getSex() > this.swimmers[j].getSex()) {
                     var swimmer = this.swimmers[i]
                     this.swimmers[i] = this.swimmers[j];
@@ -132,17 +132,8 @@ class SwimData {
                 this.ageGroup.third.push(swimmer);
             }
         });
-        console.log(this.ageGroup);
 
     }
-    // public clone() {
-    //     const cloneSwimmers = new Array();
-    //     this.swimmers.forEach((element) => {
-    //         cloneSwimmers.push((<any>Object).assign((<any>Object).create(Object.getPrototypeOf(element)), element));
-    //     });
-    //     console.log(cloneSwimmers);
-    //     return cloneSwimmers;
-    // }
 }
 class Main {
     instance: SwimData;
@@ -157,7 +148,7 @@ class Main {
 
         this.originalView.innerHTML = this.createUI(this.instance.getSwimmers());
 
-        this.clonned.sortByName();
+        this.clonned.sortBySex();
 
         this.setView();
 
@@ -193,12 +184,7 @@ class Main {
     }
 
     clone(original) {
-        var copied = (<any>Object).assign(
-            (<any>Object).create(
-                (<any>Object).getPrototypeOf(original)
-            ),
-            original
-        );
+        var copied = (<any>Object).assign( (<any>Object).create( (<any>Object).getPrototypeOf ( original ) ), original);
         copied.swimmers = original.swimmers.slice(0);
         return copied;
     }
@@ -213,7 +199,6 @@ class Main {
             <td class="column2">${element.getTime()}</td>
         </tr>`
         });
-        console.log(result)
         return result;
     }
 }
